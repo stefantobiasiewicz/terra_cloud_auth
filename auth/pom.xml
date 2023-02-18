@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.gekoniarze</groupId>
 	<artifactId>auth</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>auth</name>
 	<description>Auth for gekon</description>
 	<properties>
