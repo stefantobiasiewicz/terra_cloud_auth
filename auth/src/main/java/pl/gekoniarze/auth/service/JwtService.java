@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import pl.gekoniarze.auth.model.AppUser;
 
 import java.security.Key;
 import java.util.Date;
@@ -27,8 +28,18 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+    public String generateToken(AppUser appUser) {
+        return generateToken(getExtraClaims(appUser), appUser);
+    }
+
+    private Map<String, Object> getExtraClaims(AppUser appUser) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("id", appUser.getId());
+        map.put("email", appUser.getUsername());
+        map.put("firstName", appUser.getFirstName());
+        map.put("lastName", appUser.getSurname());
+        map.put("role", appUser.getRole());
+        return map;
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
