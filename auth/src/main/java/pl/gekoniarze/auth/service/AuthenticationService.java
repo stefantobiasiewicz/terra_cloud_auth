@@ -40,8 +40,8 @@ public class AuthenticationService {
             failedLoginService.saveFailedLoginAttempt(email);
         }
 
-        final var userDetails = appUserDetailsService.loadUserByUsername(email);
-        return jwtService.generateToken(userDetails);
+        final var appUser = appUserDetailsService.loadUserByUsername(email);
+        return jwtService.generateToken(appUser);
     }
 
 }

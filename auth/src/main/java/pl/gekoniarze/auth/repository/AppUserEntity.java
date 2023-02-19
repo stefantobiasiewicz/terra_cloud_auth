@@ -18,7 +18,6 @@ import lombok.NonNull;
 import pl.gekoniarze.auth.model.AppUser;
 
 import java.time.Instant;
-import java.util.Date;
 
 @Data
 @Builder
@@ -59,6 +58,7 @@ public class AppUserEntity {
 
     public AppUser toAppUser() {
         return AppUser.builder()
+            .id(id)
             .firstName(firstName)
             .surname(surname)
             .email(email)
