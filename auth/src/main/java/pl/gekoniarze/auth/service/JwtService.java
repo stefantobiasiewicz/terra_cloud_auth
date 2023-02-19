@@ -37,7 +37,7 @@ public class JwtService {
         map.put("id", appUser.getId());
         map.put("email", appUser.getUsername());
         map.put("firstName", appUser.getFirstName());
-        map.put("lastName", appUser.getFirstName());
+        map.put("lastName", appUser.getSurname());
         map.put("role", appUser.getRole());
         return map;
     }
