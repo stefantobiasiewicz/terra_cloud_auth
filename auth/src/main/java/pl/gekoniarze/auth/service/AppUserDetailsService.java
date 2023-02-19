@@ -1,10 +1,10 @@
 package pl.gekoniarze.auth.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import pl.gekoniarze.auth.model.AppUser;
 import pl.gekoniarze.auth.repository.AppUserEntity;
 import pl.gekoniarze.auth.repository.AuthUserRepository;
 
@@ -15,7 +15,7 @@ public class AppUserDetailsService implements UserDetailsService {
     private AuthUserRepository authUserRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public AppUser loadUserByUsername(String username) throws UsernameNotFoundException {
         return authUserRepository
             .findByEmail(username)
             .map(AppUserEntity::toAppUser)

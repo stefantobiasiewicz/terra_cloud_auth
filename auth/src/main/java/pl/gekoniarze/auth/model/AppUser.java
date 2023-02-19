@@ -8,11 +8,11 @@ import pl.gekoniarze.auth.repository.UserRole;
 
 import java.time.Instant;
 import java.util.Collection;
-import java.util.Date;
 
 @Builder
 @Getter
 public class AppUser implements UserDetails {
+    private Integer id;
     private String firstName;
     private String surname;
     private String email;
