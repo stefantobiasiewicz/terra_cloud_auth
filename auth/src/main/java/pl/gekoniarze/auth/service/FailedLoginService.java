@@ -11,6 +11,7 @@ import pl.gekoniarze.auth.repository.FailedLoginAttemptRepository;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,17 @@ public class FailedLoginService {
     public List<FailedLogin> fetchAll(String username, Integer pageNumber, Integer pageSize) {
         Pageable page = PageRequest.of(pageNumber, pageSize, Sort.by("username"));
         final var failedLoginsEntities = repository.findAll(page);
-        return failedLoginsEntities.get().map(FailedLoginAttemptEntity::toFailedLogin).toList();
+
+        if(username == null) {
+            return failedLoginsEntities.get().map(FailedLoginAttemptEntity::toFailedLogin).toList();
+        }
+        else {
+            return failedLoginsEntities.get()
+                    .map(FailedLoginAttemptEntity::toFailedLogin)
+                    .toList()
+                    .stream()
+                    .filter(failedLogin -> failedLogin.getUsername().equals(username))
+                    .collect(Collectors.toList());
+        }
     }
 }
